@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./bestselling.module.css";
-import Item from "../item/Item";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Button, Nav } from "react-bootstrap";
-import Link from "next/link";
+import { Nav } from "react-bootstrap";
 import Deals from "../deals/Deals";
 import Dealsday from "../deals/dealsday";
 
 const Bestselling = () => {
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 8,
     },
@@ -28,28 +25,11 @@ const Bestselling = () => {
       items: 2,
     },
   };
-  const responsive10 = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 8,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 4,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-    },
-  };
 
   const [isbooks, setIsBooks] = useState([]);
-  // console.log("result :", isbooks);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [topsellingdata, setTopsellingdata] = useState();
+
   const fetchBooks = async () => {
     try {
       const response = await fetch(
@@ -60,24 +40,30 @@ const Bestselling = () => {
       );
       const fetdata = await response.json();
       setIsBooks(fetdata);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Failed to fetch books", error);
+    }
   };
+
   useEffect(() => {
     fetchBooks();
   }, []);
 
-  const categories = isbooks?.books?.reduce(function (values, item) {
-    if (!values.includes(item.category)) {
-      values.push(item.category);
+  useEffect(() => {
+    if (isbooks?.books?.length > 0) {
+      const categories = isbooks.books.reduce((values, item) => {
+        if (!values.includes(item.category)) {
+          values.push(item.category);
+        }
+        return values;
+      }, []);
+      setActiveCategory(categories[0]);
+      filterItem(categories[0]);
     }
-    return values;
-  }, []);
+  }, [isbooks]);
 
-  const [topsellingdata, setTopsellingdata] = useState();
   const filterItem = (category) => {
-    const updatedList = isbooks?.books.filter((item) => {
-      return item.category === category;
-    });
+    const updatedList = isbooks?.books.filter((item) => item.category === category);
     setTopsellingdata(updatedList);
   };
 
@@ -114,10 +100,19 @@ const Bestselling = () => {
         <div className="main d-flex flex-nowrap row  p-0 m-0">
           <div className={`${styles.btn} col-2 `}>
             <Nav className="flex-column mt-4">
-              {categories?.map((btn) => (
+              {isbooks?.books?.reduce((values, item) => {
+                if (!values.includes(item.category)) {
+                  values.push(item.category);
+                }
+                return values;
+              }, []).map((btn) => (
                 <Nav.Link
-                  onClick={() => filterItem(btn)}
-                  className={`${styles.button} my-1`}
+                  key={btn}
+                  onClick={() => {
+                    setActiveCategory(btn);
+                    filterItem(btn);
+                  }}
+                  className={`${styles.button} my-1 ${activeCategory === btn ? 'active' : ''} ${activeCategory === btn ? "bg-info" : "bg-success"}`}
                 >
                   {btn}
                 </Nav.Link>
