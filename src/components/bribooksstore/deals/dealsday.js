@@ -12,7 +12,7 @@ const Dealsday = () => {
   const deal_data = [
     {
       id: 1,
-      image: "/assets/images/bristore/Group 64394.svg",
+      image: "./assets/images/bristore/Group 64394.svg",
       authore: "By Arthur Gonzalez",
       bookname: "A God Who Hates Women",
       price: "170.00",
@@ -21,7 +21,7 @@ const Dealsday = () => {
     },
     {
       id: 2,
-      image: "/assets/images/bristore/Castle .svg",
+      image: "./assets/images/bristore/Castle .svg",
       authore: "By Arthur Gonzalez",
       bookname: "A God Who Hates Women",
       price: "170.00",
@@ -30,7 +30,7 @@ const Dealsday = () => {
     },
     {
       id: 3,
-      image: "/assets/images/bristore/hans.svg",
+      image: "./assets/images/bristore/hans.svg",
       authore: "By Arthur Gonzalez",
       bookname: "A God Who Hates Women",
       price: "170.00",
@@ -39,7 +39,7 @@ const Dealsday = () => {
     },
     {
       id: 4,
-      image: "/assets/images/bristore/Group 64394.svg",
+      image: "./assets/images/bristore/Group 64394.svg",
       authore: "By Arthur Gonzalez",
       bookname: "A God Who Hates Women",
       price: "170.00",
@@ -48,7 +48,7 @@ const Dealsday = () => {
     },
     {
       id: 5,
-      image: "/assets/images/bristore/Group 64394.svg",
+      image: "./assets/images/bristore/Group 64394.svg",
       authore: "By Arthur Gonzalez",
       bookname: "A God Who Hates Women",
       price: "170.00",
@@ -93,7 +93,7 @@ const Dealsday = () => {
             </div>
             {deal_data.map((deal) => (
               <SwiperSlide className="m-0 p-0 me-2" key={deal.id}>
-                <div className="row m-0" >
+                <div className="row m-0">
                   <div className={`${styles.card} d-flex py-3 px-3`}>
                     <div>
                       <img src={deal.image} className="bookimg" alt="" />
