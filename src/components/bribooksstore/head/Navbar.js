@@ -11,7 +11,7 @@ import styles from "./navbar.module.css";
 import { BiUser } from "react-icons/bi";
 import { IoCartOutline } from "react-icons/io5";
 
-function Head() {
+function Header() {
   const btn = [
     {
       id: 1,
@@ -128,4 +128,4 @@ function Head() {
   );
 }
 
-export default Head;
+export default Header;
