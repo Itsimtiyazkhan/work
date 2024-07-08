@@ -11,7 +11,7 @@ import styles from "./navbar.module.css";
 import { BiUser } from "react-icons/bi";
 import { IoCartOutline } from "react-icons/io5";
 
-function Header({ books }) {
+function Header({ isbooks, filterItem }) {
   const btn = [
     {
       id: 1,
@@ -60,13 +60,13 @@ function Header({ books }) {
   const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
-    setFilteredBooks(books);
-  }, [books]);
+    setFilteredBooks(isbooks);
+  }, [isbooks]);
 
   const handleSearch = (event) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered = books.filter(
+    const filtered = isbooks.filter(
       (book) =>
         book.name?.toLowerCase().includes(query) ||
         book.title?.toLowerCase().includes(query)
@@ -96,7 +96,7 @@ function Header({ books }) {
               >
                 <NavDropdown className={`${styles.dropDown}`} title="All">
                   <NavDropdown.Item className={`${styles.dropDown}`}>
-                    Action
+                    Another
                   </NavDropdown.Item>
                   <NavDropdown.Item className={`${styles.test} `}>
                     Another action
@@ -144,52 +144,12 @@ function Header({ books }) {
             </div>
           </div>
         ))}
-        {/* <div className="container justify-content-md-between justify-content-center d-flex flex-wrap">
-          {filteredBooks.map((book, i) => (
-            <div className="my-2 text-center" key={i}>
-              <div className=" mx-2">
-                <img
-                  src=
-                  className={`${styles.img} px-3`}
-                  alt={book.title || book.name}
-                />
-                <div>{book.title || book.name}</div>
-              </div>
-            </div>
-          ))}
-        </div> */}
       </div>
-      {/* <div className={`${styles.showingbooks} d-flex`}>
-        {searchQuery ? (
-          filteredBooks.length > 0 ? (
-            filteredBooks.map((book, i) => (
-              <div className="my-2 text-center" key={i}>
-                <div
-                  // className={
-                  //   filteredBooks.length !== i + 1 ? "border-end mx-2" : ""
-                  // }
-                  className={`${styles.books_box}`}
-                >
-                  <img
-                    src={Imgurl + "public/" + book.cover_image}
-                    className={`${styles.img} px-3`}
-                    alt={book.title || book.name}
-                  />
-                  <div>{book.title || book.name}</div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="my-2 text-center">No books found</div>
-          )
-        ) : (
-          <div className="my-2 text-center">
-            Enter a search query to find books
-          </div>
-        )}
-      </div> */}
+
       {searchQuery && (
-        <div className={`${styles.showingbooks} container d-flex flex-wrap`}>
+        <div
+          className={`${styles.showingbooks} container d-flex flex-wrap justify-content-center`}
+        >
           {filteredBooks.length > 0 ? (
             filteredBooks.map((book, i) => (
               <div
@@ -207,7 +167,7 @@ function Header({ books }) {
               </div>
             ))
           ) : (
-            <div className="my-2 text-center">No books found</div>
+            <div className=" fw-bold my-2 ">No books found</div>
           )}
         </div>
       )}

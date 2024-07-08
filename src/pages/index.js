@@ -31,6 +31,27 @@ export default function Home() {
   useEffect(() => {
     fetchBooks();
   }, []);
+
+  useEffect(() => {
+    if (isbooks?.books?.length > 0) {
+      const categories = isbooks.books.reduce((values, item) => {
+        if (!values.includes(item.category)) {
+          values.push(item.category);
+        }
+        return values;
+      }, []);
+      setActiveCategory(categories[0]);
+      filterItem(categories[0]);
+    }
+  }, [isbooks]);
+
+  const filterItem = (category) => {
+    const updatedList = isbooks?.books.filter(
+      (item) => item.category === category
+    );
+    setTopsellingdata(updatedList);
+  };
+
   return (
     <>
       <Head>
@@ -43,7 +64,7 @@ export default function Home() {
         <div className={styles.description}></div>
         
       </main> */}
-      <Header books={isbooks} />
+      <Header isbooks={isbooks} filterItem={filterItem} />
       <Bestselling />
       <Toprated />
       <Footer />

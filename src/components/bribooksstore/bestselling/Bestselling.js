@@ -69,12 +69,14 @@ const Bestselling = () => {
     setTopsellingdata(updatedList);
   };
 
+
+
   return (
     <>
       {/* ---------------------- banner img----------------------------- */}
       <div>
         <img
-          src="/assets/images/bristore/banner.svg"
+          src="./assets/images/bristore/banner.svg"
           alt=""
           className={`${styles.banner} w-100`}
         />
