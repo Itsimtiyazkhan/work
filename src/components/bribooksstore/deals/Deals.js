@@ -52,7 +52,7 @@ const Deals = ({ top10selling, title, ...props }) => {
               writer={item.author_name}
               bookname={item.name}
               // cat={item.category}
-              // price={item.price}
+              price={item.amazon_price}
             />
           </SwiperSlide>
         ))}

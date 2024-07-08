@@ -11,18 +11,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [isbooks, setIsBooks] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [topsellingdata, setTopsellingdata] = useState();
 
   const fetchBooks = async () => {
     try {
       const response = await fetch(
-        // "https://crm.dev.bribooks.com/api/getBooks",
-        "https://api.bribooks.com/api/getBooks",
+        "https://crm.dev.bribooks.com/api/getBooks",
         {
           method: "POST",
         }
       );
       const fetdata = await response.json();
-      setIsBooks(fetdata.books || []);
+      setIsBooks(fetdata);
     } catch (error) {
       console.error("Failed to fetch books", error);
     }
@@ -51,7 +52,6 @@ export default function Home() {
     );
     setTopsellingdata(updatedList);
   };
-
   return (
     <>
       <Head>
@@ -65,7 +65,13 @@ export default function Home() {
         
       </main> */}
       <Header isbooks={isbooks} filterItem={filterItem} />
-      <Bestselling />
+      <Bestselling
+        isbooks={isbooks}
+        filterItem={filterItem}
+        setActiveCategory={setActiveCategory}
+        activeCategory={activeCategory}
+        topsellingdata={topsellingdata}
+      />
       <Toprated />
       <Footer />
     </>

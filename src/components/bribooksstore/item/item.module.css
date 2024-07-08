@@ -4,7 +4,8 @@
 }
 .item {
   width: 300px;
-  /* height: 403px; */
+  height: 400px;
+  max-height: 500px;
 }
 
 .imgdiv {
@@ -13,6 +14,7 @@
 }
 .imgdiv img {
   width: 100%;
+  height: 270px;
 }
 .item p {
   margin: 0;
@@ -48,6 +50,8 @@
   text-align: left;
   margin: 0;
   padding: 0;
+  position: absolute;
+  bottom: 0;
 }
 .cartbtn a {
   color: white;
@@ -62,6 +66,3 @@
 .btncolor:hover {
   background-color: rgba(20, 129, 8, 1);
 }
-
-
-

@@ -12,13 +12,13 @@ const Item = (props) => {
         </div>
         <div className="">
           <div className={`${styles.content} d-flex flex-column bd-highlight`}>
-            <div className="mb-auto ">
+            <div className="mb-auto my-1">
               <p>{props.writer}</p>
               <h4>{props.bookname}</h4>
               {/* <h4>{props.cat}</h4> */}
               <h5>${props.price}</h5>
             </div>
-            <div className={`${styles.cartbtn} bd-highlight `}>
+            <div className={`${styles.cartbtn} bd-highlight  `}>
               <Link href="/">
                 <Button className={styles.btncolor}>
                   <span>Add to Cart → </span>

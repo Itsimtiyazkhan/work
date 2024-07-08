@@ -7,8 +7,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import SwiperNavButtons from "./SwiperNavButtons";
+import Link from "next/link";
 
-const Dealsday = () => {
+const Dealsday = ({ deals }) => {
+  console.log(deals);
   const deal_data = [
     {
       id: 1,
@@ -56,6 +58,8 @@ const Dealsday = () => {
       sold: "21",
     },
   ];
+  const Imgurl =
+    "https://youbooks-storage-5fd6173683748-webdev.s3.amazonaws.com/";
   return (
     <div className={`${styles.containerfluid} container-fluid  py-5 `}>
       <div className="container main d-flex ">
@@ -91,21 +95,23 @@ const Dealsday = () => {
                 <SwiperNavButtons />
               </div>
             </div>
-            {deal_data.map((deal) => (
+            {deals?.map((deal) => (
               <SwiperSlide className="m-0 p-0 me-2" key={deal.id}>
                 <div className="row m-0">
                   <div className={`${styles.card} d-flex py-3 px-3`}>
-                    <div>
-                      <img src={deal.image} className="bookimg" alt="" />
+                    <div className={styles.book_img}>
+                      <img
+                        src={Imgurl + "public/" + deal.cover_image}
+                        className="bookimg"
+                        alt=""
+                      />
                     </div>
-                    <div className={`${styles.cardcontent} ps-3`}>
-                      <p>{deal.authore}</p>
-                      <h4>{deal.bookname}</h4>
-                      <h3>${deal.price}</h3>
-                      <p>
-                        Already sold: {deal.sold}/{deal.total}
-                      </p>
-                      <div className="progress my-2">
+                    <div className={`${styles.cardcontent} ps-3 `}>
+                      <p className="mb-0">{deal.author_name}</p>
+                      <h4>{deal.name}</h4>
+                      <h3>${deal.amazon_price}</h3>
+                      <p className="mb-0">Already sold: {deal.sold}</p>
+                      {/* <div className="progress my-2">
                         <div
                           className="progress-bar bg-warning "
                           style={{ width: "25%" }}
@@ -114,8 +120,15 @@ const Dealsday = () => {
                           aria-valuemin="100"
                           aria-valuemax="120"
                         ></div>
+                      </div> */}
+                      {/* <Button variant="success"> Add to Cart → </Button> */}
+                      <div className={`${styles.cartbtn} bd-highlight mb-3`}>
+                        <Link href="/">
+                          <Button className={styles.btncolor}>
+                            <span>Add to Cart → </span>
+                          </Button>
+                        </Link>
                       </div>
-                      <Button variant="success"> Add to Cart → </Button>
                     </div>
                   </div>
                 </div>

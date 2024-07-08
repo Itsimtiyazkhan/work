@@ -3,9 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Container, Nav, NavDropdown } from "react-bootstrap";
+import { Container, NavDropdown } from "react-bootstrap";
 import Link from "next/link";
 import styles from "./navbar.module.css";
 import { BiUser } from "react-icons/bi";
@@ -56,6 +54,7 @@ function Header({ isbooks, filterItem }) {
       category: "12th Grade",
     },
   ];
+
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
 
@@ -66,39 +65,43 @@ function Header({ isbooks, filterItem }) {
   const handleSearch = (event) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered = isbooks.filter(
+
+    console.log("Search query:", query);
+    console.log("Books data:", isbooks);
+
+    const filtered = isbooks.books?.filter(
       (book) =>
         book.name?.toLowerCase().includes(query) ||
         book.title?.toLowerCase().includes(query)
     );
+    console.log("Filtered books:", filtered);
+
     setFilteredBooks(filtered);
-    // console.log(filtered);
   };
+
   const Imgurl =
     "https://youbooks-storage-5fd6173683748-webdev.s3.amazonaws.com/";
+
   return (
     <>
       {/* -------------------- nav bar start --------------------- */}
-      <Navbar expand="lg" className="container-fluid bg-body-tertiary  ">
-        <Container className="">
-          <Navbar.Brand href="/bristore" className="">
-            <img src="./assets/images/bristore/LOGO (1).svg" alt="" />
+      <Navbar expand="lg" className="container-fluid bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="/bristore">
+            <img src="./assets/images/bristore/LOGO (1).svg" alt="Logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse
             className="justify-content-between text-center"
-            id="navbarScroll  "
+            id="navbarScroll"
           >
             <Form inline className={`${styles.dropdown} my-2 d-flex`}>
-              <InputGroup.Text
-                id="basic-addon1 "
-                className={`${styles.border} `}
-              >
+              <InputGroup.Text id="basic-addon1" className={`${styles.border}`}>
                 <NavDropdown className={`${styles.dropDown}`} title="All">
                   <NavDropdown.Item className={`${styles.dropDown}`}>
                     Another
                   </NavDropdown.Item>
-                  <NavDropdown.Item className={`${styles.test} `}>
+                  <NavDropdown.Item className={`${styles.test}`}>
                     Another action
                   </NavDropdown.Item>
                   <NavDropdown.Item>Something</NavDropdown.Item>
@@ -114,14 +117,13 @@ function Header({ isbooks, filterItem }) {
             </Form>
             <Form className={`${styles.navbtn} mx-2`}>
               <Link href="/bristore/login">
-                <Button variant="outline-secondary" className=" me-3 ">
+                <Button variant="outline-secondary" className="me-3">
                   <span className={styles.BiUser}>
                     <BiUser />
                   </span>
                   Login/Register
                 </Button>
               </Link>
-
               <Link href="/bristore/cart">
                 <Button variant="outline-secondary">
                   <span>
@@ -138,7 +140,7 @@ function Header({ isbooks, filterItem }) {
       {/* ----------------------- buttons --------------------- */}
       <div className="container justify-content-md-between justify-content-center d-flex flex-wrap">
         {btn.map((item, i) => (
-          <div className="my-2  text-center" key={i}>
+          <div className="my-2 text-center" key={i}>
             <div className={btn?.length !== i + 1 && "border-end mx-2"}>
               <img src={item.image} className={`${styles.img} px-3`} />
             </div>
@@ -153,7 +155,7 @@ function Header({ isbooks, filterItem }) {
           {filteredBooks.length > 0 ? (
             filteredBooks.map((book, i) => (
               <div
-                className={`${styles.books_box} my-2 mx-1 text-center border `}
+                className={`${styles.books_box} my-2 mx-1 text-center border`}
                 key={i}
               >
                 <div className="my-2">
@@ -167,7 +169,7 @@ function Header({ isbooks, filterItem }) {
               </div>
             ))
           ) : (
-            <div className=" fw-bold my-2 ">No books found</div>
+            <div className="fw-bold my-2">No books found</div>
           )}
         </div>
       )}

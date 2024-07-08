@@ -1,50 +1,76 @@
 .containerfluid {
-    background-image: url("/assets/images/bristore/HOT-DEALS.jpg");
-    width: 100%;
-  }
+  background-image: url("/assets/images/bristore/HOT-DEALS.jpg");
+  width: 100%;
+}
+
+.card {
+  width: 350px;
+  /* height: 100%; */
+  background-color: #ffff;
+  /* margin: 10px 0px 10px 0px; */
+  border-radius: 15px;
+  padding: 20px;
   
-  .card {
-    width: 350px;
-    height: 220px;
-    background-color: #ffff;
-    /* margin: 10px 0px 10px 0px; */
-    border-radius: 15px;
-  }
-  
-  .cardcontent p {
-    font-family: Montserrat;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: rgba(17, 17, 17, 1);
-  }
-  .cardcontent h4 {
-    font-family: Signika;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: rgba(0, 0, 0, 1);
-  }
-  .containerfluid h1 {
-    font-family: Signika;
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 36px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: rgba(255, 255, 255, 1);
-  }
-  .containerfluid h3 {
-    font-family: Signika;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 30px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: rgba(255, 153, 0, 1);
-  }
-  
+}
+
+.cardcontent p {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(17, 17, 17, 1);
+}
+.cardcontent h4 {
+  font-family: Signika;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+.containerfluid h1 {
+  font-family: Signika;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+}
+.containerfluid h3 {
+  font-family: Signika;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(255, 153, 0, 1);
+}
+.book_img img {
+  width: 130px;
+  height: 100%;
+}
+
+.cartbtn {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+}
+.cartbtn a {
+  color: white;
+  text-decoration: none;
+  text-align: left;
+  margin: 2px auto;
+}
+.btncolor {
+  background-color: rgba(20, 129, 8, 1);
+  border: none;
+}
+.btncolor:hover {
+  background-color: rgba(20, 129, 8, 1);
+}

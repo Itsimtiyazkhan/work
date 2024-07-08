@@ -6,7 +6,14 @@ import { Nav } from "react-bootstrap";
 import Deals from "../deals/Deals";
 import Dealsday from "../deals/dealsday";
 
-const Bestselling = () => {
+const Bestselling = ({
+  isbooks,
+  topsellingdata,
+  activeCategory,
+  setActiveCategory,
+  filterItem,
+  ...props
+}) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -25,51 +32,6 @@ const Bestselling = () => {
       items: 2,
     },
   };
-
-  const [isbooks, setIsBooks] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [topsellingdata, setTopsellingdata] = useState();
-
-  const fetchBooks = async () => {
-    try {
-      const response = await fetch(
-        "https://crm.dev.bribooks.com/api/getBooks",
-        {
-          method: "POST",
-        }
-      );
-      const fetdata = await response.json();
-      setIsBooks(fetdata);
-    } catch (error) {
-      console.error("Failed to fetch books", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  useEffect(() => {
-    if (isbooks?.books?.length > 0) {
-      const categories = isbooks.books.reduce((values, item) => {
-        if (!values.includes(item.category)) {
-          values.push(item.category);
-        }
-        return values;
-      }, []);
-      setActiveCategory(categories[0]);
-      filterItem(categories[0]);
-    }
-  }, [isbooks]);
-
-  const filterItem = (category) => {
-    const updatedList = isbooks?.books.filter(
-      (item) => item.category === category
-    );
-    setTopsellingdata(updatedList);
-  };
-
-
 
   return (
     <>
@@ -134,7 +96,7 @@ const Bestselling = () => {
       </div>
 
       {/* --------------------  Deals of the day  -------------------- */}
-      <Dealsday />
+      <Dealsday deals={isbooks?.books} />
 
       {/* ----------------  Top 10 Best Selling Authors ----------------- */}
       <div className={`${styles.container} container relative mt-4`}>
