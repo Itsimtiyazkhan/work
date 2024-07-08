@@ -63,7 +63,9 @@ const Bestselling = () => {
   }, [isbooks]);
 
   const filterItem = (category) => {
-    const updatedList = isbooks?.books.filter((item) => item.category === category);
+    const updatedList = isbooks?.books.filter(
+      (item) => item.category === category
+    );
     setTopsellingdata(updatedList);
   };
 
@@ -100,23 +102,27 @@ const Bestselling = () => {
         <div className="main d-flex flex-nowrap row  p-0 m-0">
           <div className={`${styles.btn} col-2 `}>
             <Nav className="flex-column mt-4">
-              {isbooks?.books?.reduce((values, item) => {
-                if (!values.includes(item.category)) {
-                  values.push(item.category);
-                }
-                return values;
-              }, []).map((btn) => (
-                <Nav.Link
-                  key={btn}
-                  onClick={() => {
-                    setActiveCategory(btn);
-                    filterItem(btn);
-                  }}
-                  className={`${styles.button} my-1 ${activeCategory === btn ? 'active' : ''} ${activeCategory === btn ? "bg-info" : "bg-success"}`}
-                >
-                  {btn}
-                </Nav.Link>
-              ))}
+              {isbooks?.books
+                ?.reduce((values, item) => {
+                  if (!values.includes(item.category)) {
+                    values.push(item.category);
+                  }
+                  return values;
+                }, [])
+                .map((btn) => (
+                  <Nav.Link
+                    key={btn}
+                    onClick={() => {
+                      setActiveCategory(btn);
+                      filterItem(btn);
+                    }}
+                    className={`${styles.button} my-1 ${
+                      activeCategory === btn ? "active" : ""
+                    } ${activeCategory === btn ? "bg-info" : "bg-success"}`}
+                  >
+                    {btn}
+                  </Nav.Link>
+                ))}
             </Nav>
           </div>
           <div className={`${styles.carouselside} col-8 col-md-8 col-lg-9`}>

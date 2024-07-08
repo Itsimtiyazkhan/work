@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import React, { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Bestselling from "@/components/bribooksstore/bestselling/Bestselling";
@@ -9,6 +10,27 @@ import Header from "@/components/bribooksstore/head/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [isbooks, setIsBooks] = useState([]);
+
+  const fetchBooks = async () => {
+    try {
+      const response = await fetch(
+        // "https://crm.dev.bribooks.com/api/getBooks",
+        "https://api.bribooks.com/api/getBooks",
+        {
+          method: "POST",
+        }
+      );
+      const fetdata = await response.json();
+      setIsBooks(fetdata.books || []);
+    } catch (error) {
+      console.error("Failed to fetch books", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
   return (
     <>
       <Head>
@@ -21,10 +43,10 @@ export default function Home() {
         <div className={styles.description}></div>
         
       </main> */}
-      <Header />
-        <Bestselling />
-        <Toprated />
-        <Footer />
+      <Header books={isbooks} />
+      <Bestselling />
+      <Toprated />
+      <Footer />
     </>
   );
 }
