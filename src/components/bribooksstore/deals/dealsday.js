@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import SwiperNavButtons from "./SwiperNavButtons";
 import Link from "next/link";
-
+import Image from "next/image";
 const Dealsday = ({ deals }) => {
   console.log(deals);
   const deal_data = [
@@ -61,8 +61,29 @@ const Dealsday = ({ deals }) => {
   const Imgurl =
     "https://youbooks-storage-5fd6173683748-webdev.s3.amazonaws.com/";
   return (
-    <div className={`${styles.containerfluid} container-fluid  py-5 `}>
-      <div className="container main d-flex ">
+    <div className={`${styles.containerfluid}   py-5 `}>
+      <div
+        className=" main d-flex "
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          height: "380px",
+        }}
+      >
+        <Image
+          src="./assets/images/bristore/HOT-DEALS.jpg"
+          layout="fill"
+          alt="background image"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: -1,
+          }}
+        />
         <div className="container p-0">
           <Swiper
             spaceBetween={65}
@@ -88,11 +109,11 @@ const Dealsday = ({ deals }) => {
             }}
           >
             <div className={`${styles.main} d-flex bd-highlight py-3`}>
-              <div className={`${styles.head} me-auto my-2 `}>
-                <h1 className="text-black">Deals of the Day</h1>
+              <div className={`${styles.head} me-auto my-1 `}>
+                <h1 className="text-white">Deals of the Day</h1>
               </div>
               <div>
-                <SwiperNavButtons />
+                <SwiperNavButtons dealsofday="dealsofday" />
               </div>
             </div>
             {deals?.map((deal) => (

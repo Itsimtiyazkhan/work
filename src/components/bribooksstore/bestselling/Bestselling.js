@@ -53,7 +53,7 @@ const Bestselling = ({
       {/* ---------- Best selling authors books banner img ------------ */}
       <div>
         <img
-          src="/assets/images/bristore/ADVERT.svg"
+          src="./assets/images/bristore/ADVERT.svg"
           alt=""
           className={`${styles.banner} w-100 mt-2`}
         />
@@ -96,7 +96,7 @@ const Bestselling = ({
       </div>
 
       {/* --------------------  Deals of the day  -------------------- */}
-      <Dealsday deals={isbooks?.books} />
+      <Dealsday deals={isbooks?.books} day="dealsofday" />
 
       {/* ----------------  Top 10 Best Selling Authors ----------------- */}
       <div className={`${styles.container} container relative mt-4`}>
