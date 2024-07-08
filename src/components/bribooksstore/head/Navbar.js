@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -11,7 +11,7 @@ import styles from "./navbar.module.css";
 import { BiUser } from "react-icons/bi";
 import { IoCartOutline } from "react-icons/io5";
 
-function Head() {
+function Header({ isbooks, filterItem }) {
   const btn = [
     {
       id: 1,
@@ -56,7 +56,26 @@ function Head() {
       category: "12th Grade",
     },
   ];
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
+  useEffect(() => {
+    setFilteredBooks(isbooks);
+  }, [isbooks]);
+
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+    const filtered = isbooks.filter(
+      (book) =>
+        book.name?.toLowerCase().includes(query) ||
+        book.title?.toLowerCase().includes(query)
+    );
+    setFilteredBooks(filtered);
+    // console.log(filtered);
+  };
+  const Imgurl =
+    "https://youbooks-storage-5fd6173683748-webdev.s3.amazonaws.com/";
   return (
     <>
       {/* -------------------- nav bar start --------------------- */}
@@ -77,7 +96,7 @@ function Head() {
               >
                 <NavDropdown className={`${styles.dropDown}`} title="All">
                   <NavDropdown.Item className={`${styles.dropDown}`}>
-                    Action
+                    Another
                   </NavDropdown.Item>
                   <NavDropdown.Item className={`${styles.test} `}>
                     Another action
@@ -89,6 +108,8 @@ function Head() {
               <Form.Control
                 className={styles.formcontrol}
                 placeholder="Search by title, author or ISBN here..."
+                value={searchQuery}
+                onChange={handleSearch}
               />
             </Form>
             <Form className={`${styles.navbtn} mx-2`}>
@@ -124,8 +145,34 @@ function Head() {
           </div>
         ))}
       </div>
+
+      {searchQuery && (
+        <div
+          className={`${styles.showingbooks} container d-flex flex-wrap justify-content-center`}
+        >
+          {filteredBooks.length > 0 ? (
+            filteredBooks.map((book, i) => (
+              <div
+                className={`${styles.books_box} my-2 mx-1 text-center border `}
+                key={i}
+              >
+                <div className="my-2">
+                  <img
+                    src={Imgurl + "public/" + book.cover_image}
+                    className={`${styles.img} px-3`}
+                    alt={book.title || book.name}
+                  />
+                  <p className="mx-3 my-2">{book.title || book.name}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className=" fw-bold my-2 ">No books found</div>
+          )}
+        </div>
+      )}
     </>
   );
 }
 
-export default Head;
+export default Header;

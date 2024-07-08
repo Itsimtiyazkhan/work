@@ -103,7 +103,7 @@ const Footer = () => {
             className={`${styles.footerlogocontent} col-12 col-sm-4 col-md-6  col-xl-4 `}
           >
             <img
-              src="./assets/images/festival-website/BriBooks.svg"
+              src="./assets/images/bristore/LOGO (1).svg"
               className={`${styles.footerlogo}`}
             />
             <p className={`${styles.footerpara} text-black`}>

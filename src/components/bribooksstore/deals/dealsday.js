@@ -85,7 +85,7 @@ const Dealsday = () => {
           >
             <div className={`${styles.main} d-flex bd-highlight py-3`}>
               <div className={`${styles.head} me-auto my-2 `}>
-                <h1>Deals of the Day</h1>
+                <h1 className="text-black">Deals of the Day</h1>
               </div>
               <div>
                 <SwiperNavButtons />
