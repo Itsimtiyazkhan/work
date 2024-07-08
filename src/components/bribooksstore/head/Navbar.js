@@ -189,17 +189,20 @@ function Header({ books }) {
         )}
       </div> */}
       {searchQuery && (
-        <div className={`${styles.showingbooks} d-flex`}>
+        <div className={`${styles.showingbooks} container d-flex flex-wrap`}>
           {filteredBooks.length > 0 ? (
             filteredBooks.map((book, i) => (
-              <div className="my-2 text-center" key={i}>
-                <div className={`${styles.books_box}`}>
+              <div
+                className={`${styles.books_box} my-2 mx-1 text-center border `}
+                key={i}
+              >
+                <div className="my-2">
                   <img
                     src={Imgurl + "public/" + book.cover_image}
                     className={`${styles.img} px-3`}
                     alt={book.title || book.name}
                   />
-                  <h6>{book.title || book.name}</h6>
+                  <p className="mx-3 my-2">{book.title || book.name}</p>
                 </div>
               </div>
             ))
